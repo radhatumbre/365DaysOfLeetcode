@@ -1,0 +1,27 @@
+// C++ language
+class Solution {
+public:
+    bool isHappy(int n) {
+        int count = 10;   //10 is taken a rough estimate 
+        int new_num = 0;
+        int rem = 0;
+        
+        while(count){
+            rem =0;
+            new_num= 0;
+            while(n){
+                rem = n%10;
+                new_num += rem*rem;
+                n=n/10;
+            }
+            
+            if(new_num==1)
+                return true;
+        
+            n = new_num;
+            count-=1;
+            
+        }
+        return false;
+    }
+};
