@@ -1,0 +1,13 @@
+class Solution {
+    public String restoreString(String s, int[] indices) {
+        String str = "";
+        for(int i=0;i<s.length(); i++){
+            str += "a";
+        }
+        for(int i=0;i<indices.length; i++){
+            str = str.substring(0, indices[i]) + s.charAt(i)
+              + str.substring(indices[i] + 1);
+        }
+        return str;
+    }
+}
