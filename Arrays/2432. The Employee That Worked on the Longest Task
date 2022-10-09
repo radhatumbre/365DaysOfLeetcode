@@ -1,0 +1,20 @@
+class Solution {
+    public int hardestWorker(int n, int[][] logs) {
+        int tasks = logs.length;
+        int last = 0;
+        int unites = 0;
+        int longest = 0;
+        for(int i=0;i<tasks;i++){
+            if(logs[i][1] - last > unites){
+                unites =logs[i][1] - last;
+                longest = i;
+            }
+            if(logs[i][1] - last == unites){
+                if(logs[longest][0] > logs[i][0])
+                    longest = i;
+            }
+            last = logs[i][1];
+        }
+        return logs[longest][0];
+    }
+}
