@@ -1,0 +1,25 @@
+class Solution {
+	public String[] findRestaurant(String[] list1, String[] list2) {
+		ArrayList<String> set = new ArrayList<>();
+		int least = list1.length + list2.length;
+		int count = 0;
+		for (int i = 0; i < list1.length; i++) {
+			for (int j = 0; j < list2.length; j++) {
+				if (list1[i].equals(list2[j])) {
+					if (i + j == least) {
+						set.add(list1[i]);
+						count++;
+
+					} else if (i + j < least) {
+						set.clear();
+						set.add(list1[i]);
+						least = i + j;
+						count = 1;
+					}
+				}
+			}
+		}
+		String[] ans = set.toArray(new String[set.size()]);
+		return ans;
+	}
+}
