@@ -1,0 +1,27 @@
+class Solution {
+    public int calPoints(String[] operations) {
+        int ans=0;
+        int top = -1;
+        int arr[] = new int[operations.length*2];
+        for(int i=0; i<operations.length; i++){
+            if(operations[i].equals("C")){
+                top--;
+            }
+            else if(operations[i].equals("D")){
+                int d = arr[top] * 2;
+                arr[++top] = d;
+            }
+            else if(operations[i].equals("+")){
+                int d = arr[top] + arr[top-1];
+                arr[++top] = d;
+            }
+            else{
+                arr[++top] =Integer.parseInt(operations[i]);  
+            }
+        }
+        for(int i=0; i<=top;i++){
+            ans+=arr[i];
+        }
+        return ans;
+    }
+}
