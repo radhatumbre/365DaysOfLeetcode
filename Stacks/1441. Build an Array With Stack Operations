@@ -1,0 +1,29 @@
+class Solution {
+    public List<String> buildArray(int[] target, int n) {
+        ArrayList<String> ans = new ArrayList<String>();
+        int counter = 0;
+        int[] arr = new int[n];
+        int top = -1;
+        int i=1;
+        int j=0;
+        while(i<=target[target.length-1]){
+            if(target[j]>i){
+                ans.add("Push");
+                ans.add("Pop");
+            }
+            else if(target[j]==i){
+                ans.add("Push");
+                arr[++top] = i;
+                j++;
+            }
+
+            i++;
+            
+            
+            
+            
+        }
+        return ans;
+        
+    }
+}
