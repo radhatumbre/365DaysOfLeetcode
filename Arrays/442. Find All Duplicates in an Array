@@ -1,0 +1,25 @@
+class Solution {
+    public List<Integer> findDuplicates(int[] nums) {
+        ArrayList<Integer> ans = new ArrayList<Integer>();
+        HashMap<Integer, Integer> map  = new HashMap<>();
+        for(int i=0;i<nums.length; i++){
+            //  Check if key Already present 
+            // if yes increment else add key and value 1
+            if(map.containsKey(nums[i])){
+                int count = map.get(nums[i]);
+                map.replace(nums[i],count+1);
+            }
+            else{
+                map.put(nums[i], 1);
+            }
+            
+        }
+        //  Iterate and find elements with value more than 1
+        for (Map.Entry<Integer, Integer> set :map.entrySet()) {
+            if(set.getValue() > 1)
+                ans.add(set.getKey());
+        }
+        return ans;
+        
+    }
+}
