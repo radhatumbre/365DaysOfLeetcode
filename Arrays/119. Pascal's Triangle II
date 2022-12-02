@@ -1,0 +1,30 @@
+class Solution {
+    public List<Integer> getRow(int rowIndex) {
+        List<Integer> ans = new ArrayList<>();
+        int[] values = new int[rowIndex+1];    // nums from previous level
+        int[] current = new int[rowIndex+1];   //current elements
+        
+        for(int i=0; i<rowIndex+1; i++){
+            for(int j=0; j<=i;j++){
+                if(j==0 || j==i){
+                    current[j] = 1;
+                }
+                else{
+                    int sum = values[j] + values[j-1];
+                    current[j] = sum;
+                }
+            }
+            for(int j=0; j<=i; j++){
+                values[j] = current[j];     //update the elements 
+            }
+            
+            if(i==rowIndex){
+                for(int j=0; j<rowIndex+1;j++){
+                    ans.add(current[j]);
+                }
+            }
+            
+        }
+        return ans;
+    }
+}
