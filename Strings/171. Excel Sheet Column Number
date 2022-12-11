@@ -1,0 +1,17 @@
+class Solution {
+    public int titleToNumber(String columnTitle) {
+        int n = columnTitle.length();
+        int res = 0;
+        for(int i=0; i<n; i++){
+            //  In Ascii uppercase letter starts from 65
+            res += (columnTitle.charAt(i)-64) * Math.pow(26,n-i-1);
+        }  
+        return res;
+    }
+}
+
+/**
+AB = (26^1 * A) + (26^0 * B)
+ZY = (26^1 * Z) + (26^0 * Y)
+ABX = (26^2 * A) + (26^1 * B) + (26^0 * X)
+**/
