@@ -1,0 +1,88 @@
+class Solution {
+    public String intToRoman(int num) {
+        String str = "" ; 
+        int n = num;
+        int length = String.valueOf(num).length();
+        for(int i = 0; i<length; i++){
+            //  units place
+            if(i == 0){ 
+                int temp = n%10;
+                switch(temp){
+                    case 4:
+                        str = "IV" + str;
+                        break;
+                    case 9:
+                        str = "IX" + str;
+                        break;
+                    default :
+                        if(temp<4){
+                            for(int j=0; j<temp; j++)
+                                str = "I" + str;
+                        }
+                        else{
+                            for(int j=0; j<temp-5; j++)
+                                str = "I" + str;
+                            str = "V" + str;
+                        }
+                        break;
+                }
+            }
+            //  tens place
+            else if(i == 1){
+                int temp = (n/10)%10;
+                switch(temp){
+                    case 4:
+                        str = "XL" + str;
+                        break;
+                    case 9:
+                        str = "XC" + str;
+                        break;
+                    default :
+                        if(temp<4){
+                            for(int j=0; j<temp; j++)
+                                str = "X" + str;
+                        }
+                        else{
+                            for(int j=0; j<temp-5; j++)
+                                str = "X" + str;
+                            str = "L" + str;
+                        }
+                        break;
+                }
+            }
+            //  hundreds 
+            else if(i == 2){
+                int temp = (n/100)%10;
+                switch(temp){
+                    case 4:
+                        str = "CD" + str;
+                        break;
+                    case 9:
+                        str = "CM" + str;
+                        break;
+                    default :
+                        if(temp<4){
+                            for(int j=0; j<temp; j++)
+                                str = "C" + str;
+                        }
+                        else{
+                            for(int j=0; j<temp-5; j++)
+                                str = "C" + str;
+                            str = "D" + str;
+                        }
+                        break;
+                }
+            }
+            //  one thousands
+            else{
+                int temp = (n/1000)%10;
+                for(int j=0; j<temp; j++)
+                        str = "M" + str;
+            }
+        }
+        return str;
+
+
+
+    }
+}
