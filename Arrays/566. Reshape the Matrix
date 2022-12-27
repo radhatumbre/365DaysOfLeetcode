@@ -1,0 +1,27 @@
+class Solution {
+    public int[][] matrixReshape(int[][] mat, int r, int c) {
+        // mat.length*mat[0].length is total no of elements 
+        // check if the matrix is possible
+        if(mat.length*mat[0].length/r < 1 || mat.length*mat[0].length%r!=0)
+            return mat;
+        int[][] ans = new int[r][mat.length*mat[0].length/r];
+        int[] nums = new int[mat.length*mat[0].length];
+        int counter = 0; 
+        // array of all number in mat
+        for(int i=0; i<mat.length; i++){
+            for(int j=0; j<mat[0].length; j++){
+                nums[counter++] = mat[i][j];
+            }
+        }
+
+        // putting the nums in the resultant matrix
+        counter = 0; 
+        for(int i=0; i<r; i++){
+            for(int j=0; j<mat.length*mat[0].length/r; j++){
+                ans[i][j] = nums[counter++];
+                
+            }
+        }
+        return ans;
+    }
+}
