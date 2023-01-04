@@ -1,0 +1,71 @@
+class Solution {
+    public int minimumRounds(int[] tasks) {
+        // array method
+        Arrays.sort(tasks);
+        if(tasks.length==1) 
+            return -1;
+        int round = 0;
+        int i=0,j=1;
+        while(j<=tasks.length){
+            if(j==tasks.length){
+                int n=j-i;
+                if(n == 1)
+                    return -1;
+                else if(n%3==0)
+                    round += n/3;
+                else if(n%3==2)
+                    round += (n-2)/3 +1;
+                else if(n%3==1 && n>3)
+                    round += (n-4)/3 + 2;   // 5,5,5,5 -> 2
+                i=j;
+                j++;
+            }
+            else if(tasks[i]!=tasks[j]){
+                int n=j-i;
+                if(n == 1)
+                    return -1;
+                else if(n%3==0)
+                    round += n/3;
+                else if(n%3==2)
+                    round += (n-2)/3 +1;
+                else if(n%3==1 && n>3)
+                    round += (n-4)/3 + 2;   // 5,5,5,5 -> 2
+                i=j;
+                j++;
+            }
+            else
+                j++;
+        }
+        return round;
+    
+    
+        /*** HashMap method
+        int round = 0;
+        HashMap<Integer, Integer> map = new HashMap<Integer, Integer>();
+        for(int i=0;i<tasks.length; i++){
+            int n = tasks[i];
+            if(map.containsKey(n)){
+                map.put(n, map.get(n)+1);
+            }
+            else{
+                map.put(n, 1);
+            }
+        }
+        for (Map.Entry<Integer,Integer> entry : map.entrySet()) {
+            if(entry.getValue()%3==0){
+                round += entry.getValue()/3;
+            }
+            else  if(entry.getValue()%3==2){
+                round += (entry.getValue()-2)/3 +1;
+            }
+            else if(entry.getValue()%3==1 && entry.getValue()>3){
+                round += (entry.getValue()-4)/3 +2; // 5,5,5,5 -> 2
+            }
+            else
+                return -1;
+        }
+        return round;
+        */
+        
+    }
+}
