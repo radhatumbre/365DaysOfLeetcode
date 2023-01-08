@@ -1,0 +1,32 @@
+class Solution {
+    public int maxPoints(int[][] points) {
+        if(points.length==1)
+            return 1;
+        
+        int max = 0;
+        for(int i=0; i<points.length; i++){
+            // with each pair check the slopes 
+            HashMap<Float, Integer> map = new HashMap<Float, Integer>();
+            for(int j=0; j<points.length; j++){
+                if(i==j)
+                    continue;
+                float numer = points[i][1]-points[j][1];
+                float denom = points[i][0]-points[j][0];
+                float slope = numer/denom;
+                if(map.containsKey(slope))
+                    map.replace(slope, map.get(slope)+1);
+                else
+                    map.put(slope, 2);
+            }
+            // find the slope having maximum no of points
+            int currmax = 0;
+            for (Map.Entry<Float,Integer> entry : map.entrySet()) {
+                if(currmax<entry.getValue())
+                    currmax = entry.getValue();
+            }   
+            if(max<currmax)
+                max = currmax;
+        }
+        return max;
+    }
+}
