@@ -1,0 +1,35 @@
+class Solution {
+    public void setZeroes(int[][] matrix) {
+        int row = matrix.length;
+        int col = matrix[0].length;
+        HashSet<Integer> setrows = new HashSet<Integer>();
+        HashSet<Integer> setcols = new HashSet<Integer>();
+        for(int i=0; i<row; i++){
+            for(int j=0; j<col; j++){
+                if(matrix[i][j]==0){
+                    setrows.add(i); //get rows to be converted to 0
+                    setcols.add(j); //get cols to be converted to 0
+                }
+            }
+        }
+        // convert rows
+        for(int i=0; i<row; i++){
+            if(setrows.contains(i)){
+                for(int j=0; j<col; j++){
+                    matrix[i][j]=0;
+                }
+            }   
+        }
+        // convert cols
+        for(int i=0; i<col; i++){
+            if(setcols.contains(i)){
+                for(int j=0; j<row; j++){
+                    matrix[j][i]=0;
+                }
+            }   
+        }
+        
+    }
+}
+
+
