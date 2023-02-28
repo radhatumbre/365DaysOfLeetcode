@@ -1,0 +1,20 @@
+class Solution {
+    public char nextGreatestLetter(char[] letters, char target) {
+        int left = 0;
+		int right = letters.length-1;
+
+        // if no elements in the array are greater than target directly return the first element
+        if(letters[right]<=target)
+            return letters[0];
+        
+        // normal binary search (ceiling)
+		while(left<=right) {
+		    int mid = (left + right)/2;
+		    if(letters[mid]>target)
+		        right = mid-1;
+		    else    
+		        left = mid+1;
+		}
+		return letters[left];
+    }
+}
