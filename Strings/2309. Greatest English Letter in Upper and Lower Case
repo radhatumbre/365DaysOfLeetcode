@@ -1,0 +1,25 @@
+class Solution {
+    public String greatestLetter(String s) {
+        HashSet<Character> set1 = new HashSet<Character>();
+        HashSet<Character> set2 = new HashSet<Character>();
+        // add lowercase characters
+        for(int i=0; i<s.length(); i++){
+            char ch = s.charAt(i);
+            if(Character.isLowerCase(ch))
+                set1.add(s.charAt(i));
+        }
+        // add uppercase characters having lowercase as well
+        for(int i=0; i<s.length(); i++){
+            char ch = s.charAt(i);
+            if(Character.isUpperCase(ch) && set1.contains(Character.toLowerCase(ch)) )
+                set2.add(s.charAt(i));
+        }
+        // if no element present
+        if(set2.size()==0)
+            return "";
+            
+        Object obj = Collections.max(set2);
+        String ans = String. valueOf(obj) ;
+        return ans;
+    }
+}
