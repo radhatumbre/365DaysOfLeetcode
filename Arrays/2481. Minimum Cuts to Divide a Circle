@@ -1,0 +1,10 @@
+class Solution {
+    public int numberOfCuts(int n) {
+        if(n==1)    // entire circle
+            return 0;
+        if(n%2==0)  // even pieces 
+            return n/2;
+        else    // odd pieces
+            return n;
+    }
+}
