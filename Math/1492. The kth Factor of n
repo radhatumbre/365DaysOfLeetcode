@@ -1,0 +1,46 @@
+class Solution {
+    public int kthFactor(int n, int k) {
+        // base case
+        if(n==1 && k==1)
+            return 1;
+            
+        // get no of factors
+        int counter=0;
+        for(int i=1; i<=Math.sqrt(n); i++){
+            if(i*i==n)
+                counter++;
+            else if(n%i==0){
+                counter+=2;
+            }
+        }
+        if(k>counter)
+            return -1;
+
+        // check if kth factor lies in the second half
+        boolean secondhalf= false;
+        if(k>counter/2){
+            secondhalf = true;
+            // 6 -> 1= 6-6+1        (12/1==12)
+            // 5 -> 2 = 6-5+1       (12/2==6)
+            // 4 -> 3 = 6-4+1       (12/3==4)
+            k = counter-k+1;
+        }
+
+        // find the kth element
+        int j=0;
+        int i=1;
+        for(i=1; i<Math.sqrt(n); i++){
+            if(n%i==0){
+                j++;
+            }
+            if(j==k)
+                break;
+        }
+
+        if(secondhalf == true)
+            return n/i;
+        else
+            return i;
+
+    }
+}
