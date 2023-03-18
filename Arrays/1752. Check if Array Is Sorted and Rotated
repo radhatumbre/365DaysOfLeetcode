@@ -1,0 +1,13 @@
+class Solution {
+    public boolean check(int[] nums) {
+        int seriesBreak=0;
+        int n=nums.length;
+        for(int i=1; i<nums.length+1; i++){
+            if(nums[(i-1)%n]>nums[i%n]) // modulus because to check first and last element are in ascending order as well
+                seriesBreak++;
+        }
+        if(seriesBreak==1 || seriesBreak==0)
+            return true;
+        return false;
+    }
+}
