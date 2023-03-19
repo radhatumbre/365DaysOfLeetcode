@@ -1,0 +1,44 @@
+class Solution {
+    public List<String> subdomainVisits(String[] cpdomains) {
+        List<String> ans = new ArrayList<>();
+        HashMap<String, Integer> map = new HashMap<String, Integer>();
+        for(int i=0; i<cpdomains.length; i++){
+            String str = cpdomains[i];
+            int value = Integer.valueOf(str.split(" ")[0]);
+            String domain = str.split(" ")[1];
+            
+            // find no. of no of domains "google.mai.com" or "just mail.com"
+            // **** to get fullstop need to use "\\."
+            String[] words = domain.split("\\.");  // ["google","mail","com"]
+            String[] subdomains;
+            if(words.length==3){  // google.mail.com
+                subdomains = new String[3];
+                subdomains[0] = String.join(".",words[0],words[1],words[2]);
+                subdomains[1] = String.join(".",words[1],words[2]);
+                subdomains[2] = words[2];
+            }
+            else{   // mail.com
+                subdomains = new String[2];
+                subdomains[0] = String.join(".",words[0],words[1]);
+                subdomains[1] = words[1];
+            }
+
+            // google.mail.com
+            for(String j: subdomains){
+                if(map.containsKey(j)){
+                    map.replace(j, map.get(j)+value);
+                }
+                else
+                    map.put(j, value);
+            }
+            
+        }
+
+        // the values in the list
+        for (Map.Entry<String,Integer> entry : map.entrySet()) {
+            ans.add(String.join(" ", String.valueOf(entry.getValue()), entry.getKey()));
+        }
+
+        return ans;
+    }
+}
