@@ -1,0 +1,13 @@
+class Solution {
+    public int arrangeCoins(int n) {
+        long coins=0;
+        int i=1;
+        while(coins<n){
+            coins+=i;
+            i++;
+        }
+        if(coins==n)    // last staircase is completely filled
+            return i-1;
+        return i-2;
+    }
+}
