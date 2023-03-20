@@ -1,0 +1,31 @@
+class Solution {
+    public int garbageCollection(String[] garbage, int[] travel) {
+        // stops
+        int mstop =-1;
+        int pstop=-1;
+        int gstop=-1;
+
+        int total = 0;  //  total time taken
+
+        // final stop of each truck and time to pick all the items
+        for(int i=0; i<garbage.length; i++){
+            if(garbage[i].contains("M"))
+                mstop = i;
+            if(garbage[i].contains("P"))
+                pstop = i;
+            if(garbage[i].contains("G"))
+                gstop = i;
+            total += garbage[i].length();
+        }
+
+        // travel time only
+        for(int i=0; i<mstop; i++)
+            total += travel[i];
+        for(int i=0; i<pstop; i++)
+            total += travel[i];
+        for(int i=0; i<gstop; i++)
+            total += travel[i];
+
+        return total;
+    }
+}
