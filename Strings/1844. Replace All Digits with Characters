@@ -1,0 +1,22 @@
+class Solution {
+    public String replaceDigits(String s) {
+        String str = "";
+        for(int i=1; i<=s.length(); i+=2){
+            
+            // last letter is character - "a1b2c3d4e"
+            if(i==s.length() && s.length()%2==1){
+                str += s.charAt(i-1);
+                continue;
+            }
+
+            // increment the previous character 
+            char ch = s.charAt(i-1);
+            ch += (s.charAt(i) - '0');
+
+            // add previous char & current char
+            str += s.charAt(i-1);
+            str += ch;
+        }
+        return str;
+    }
+}
