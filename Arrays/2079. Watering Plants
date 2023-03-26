@@ -1,0 +1,15 @@
+class Solution {
+    public int wateringPlants(int[] plants, int capacity) {
+        int step = 0;
+        int water = capacity;
+        for(int i=0; i<plants.length; i++){
+            if(water<plants[i]){    // deficiency of water
+                step += i*2;    //  to go refil and comeback
+                water = capacity;
+            }
+            water -= plants[i];
+            step +=1;
+        }
+        return step;
+    }
+}
