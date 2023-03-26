@@ -1,0 +1,9 @@
+class Solution {
+    public int findMin(int[] nums) {
+        for(int i=nums.length; i<nums.length*2; i++){
+            if(nums[i%nums.length] < nums[(i-1)%nums.length])
+                return nums[i%nums.length];
+        }
+        return nums[0];
+    }
+}
