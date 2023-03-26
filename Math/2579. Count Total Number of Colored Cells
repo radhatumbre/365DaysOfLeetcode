@@ -1,0 +1,15 @@
+class Solution {
+    public long coloredCells(int n) {
+        long cells = 0;
+        long j=1;
+        for(long i=1; i<=n; i++){
+            if(i==n)    // middle column
+                cells += j;
+            else{
+            cells += j*2;     // left right both columns
+            j +=2;
+            }
+        }
+        return cells;
+    }
+}
