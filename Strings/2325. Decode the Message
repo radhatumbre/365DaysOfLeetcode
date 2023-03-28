@@ -1,0 +1,24 @@
+class Solution {
+    public String decodeMessage(String key, String message) {
+        List<Character> set = new ArrayList<>();
+        for(int i=0; i<key.length(); i++){
+            if(key.charAt(i)==' ')
+                continue;
+            if(!set.contains(key.charAt(i)))
+                set.add(key.charAt(i));
+        }
+        String ans = "";
+        for(int i=0; i<message.length(); i++){
+            if(message.charAt(i)==' '){
+                ans += " ";
+                continue;
+            }
+            int var = set.indexOf(message.charAt(i));   // get the int of alphabet
+            char ch = 'a' ;
+            ch += var;  // get the alphabet by incrementing the int (ASCII)
+            ans += ch;
+            
+        }
+        return ans;
+    }
+}
