@@ -1,0 +1,60 @@
+class Solution {
+    public String largestPalindromic(String num) {
+        List<Integer> numbers = new ArrayList<>();
+        HashMap<Integer, Integer> map = new HashMap<Integer, Integer>();
+        long zeroes = 0;
+        for(int i=0; i<num.length(); i++){
+            int n = num.charAt(i)-48;
+            
+            if(n==0)
+                zeroes++;
+
+            if(map.containsKey(n)){
+                map.put(n, map.get(n)+1);
+                if(map.get(n)==2){
+                    numbers.add(n);
+                    map.remove(n);
+                }
+            }
+            else
+                map.put(n,1);
+        }
+        // num = "0000000" -> "0"
+        if(zeroes == num.length())
+            return "0";
+
+        Collections.sort(numbers, Collections.reverseOrder());
+        String ans = "";
+
+        // first half
+        int notzero = 0;
+        for(int i=0; i<numbers.size(); i++){
+
+            // num ="00001105" -> "1005001" CHECK if nonzero number exsist before
+            if(numbers.get(i) ==0 && notzero==0)
+                continue;
+            notzero++;
+
+            ans += numbers.get(i);
+        }
+
+        // middle present
+        if(map.size()>0){
+            int highest = 0;
+            for(Map.Entry<Integer, Integer> entry : map.entrySet()){
+                if(entry.getKey()>highest)
+                    highest = entry.getKey();
+            }
+            ans += highest;
+            for(int i=ans.length()-2; i>-1; i--){
+                ans += ans.charAt(i);
+            }
+        }
+        else{   // middle not present
+            for(int i=ans.length()-1; i>-1; i--){
+                ans += ans.charAt(i);
+            }
+        }
+        return ans;
+    }
+}
