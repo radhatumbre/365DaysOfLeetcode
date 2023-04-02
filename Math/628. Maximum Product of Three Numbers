@@ -1,0 +1,22 @@
+class Solution {
+    public int maximumProduct(int[] nums) {
+        Arrays.sort(nums);
+        int n = nums.length;
+        int res = 1;
+
+        // all negative [-1,-2,-3,-4] -> (-1,-2,-3)
+        if(nums[n-1]<0)
+            res = nums[n-1]*nums[n-2]*nums[n-3];
+
+        // (two start and one end)
+        // [-100,-98,-1,2,3,4] -> (-100,-98,4)
+        else if(nums[0]*nums[1]*nums[n-1] > nums[n-1]*nums[n-2]*nums[n-3])
+            res = nums[0]*nums[1] * nums[n-1];
+        
+        // all end [1,2,3,4] -> (2,3,4)
+        else    
+            res = nums[n-1]*nums[n-2]*nums[n-3];
+        
+        return res;
+    }
+}
