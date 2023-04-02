@@ -1,0 +1,29 @@
+class Solution {
+    public int[] successfulPairs(int[] spells, int[] potions, long success) {
+
+        Arrays.sort(potions);
+        int n = potions.length;
+        for(int i=0; i<spells.length; i++){
+
+            // bianry search;
+            int pos = findPos(spells[i], potions, success);
+            
+            spells[i] = n - pos;
+        }
+        return spells;
+
+    }
+    static int findPos(int n, int[] pos, long target){
+        int low=0;
+        int high = pos.length-1;
+        while(low<=high){
+            int mid = (low+high)/2;
+            long product = (long)n*pos[mid];
+            if(product>=target)
+                high = mid-1;
+            else
+                low = mid+1;
+        }
+        return low;
+    }
+}
