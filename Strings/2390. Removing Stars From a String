@@ -1,0 +1,22 @@
+class Solution {
+    public String removeStars(String s) {
+        int n = s.length();
+        String ans = "";
+        char[] stack = new char[n];
+        int top = -1;
+        for(int i=0; i<n; i++){
+            if(s.charAt(i)!='*'){
+                stack[++top] = s.charAt(i);
+            }
+            else{
+                top--;
+            }
+             
+        }
+        for(int i=0; i<top+1; i++){
+            ans+= stack[i];
+             
+        }
+        return ans;
+    }
+}
