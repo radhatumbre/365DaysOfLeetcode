@@ -1,0 +1,30 @@
+class Solution {
+    public boolean validateStackSequences(int[] pushed, int[] popped) {
+        List<Integer> stack = new ArrayList<>();
+        List<Integer> rem = new ArrayList<>();
+        for(int i=0; i<pushed.length; i++){
+            rem.add(pushed[i]);
+        }
+
+        for(int i=0; i<popped.length; i++){
+            int n = popped[i];
+            if(stack.contains(n) && stack.indexOf(n)!=stack.size()-1)
+                return false;
+            if(stack.contains(n) && stack.indexOf(n)==stack.size()-1){
+                stack.remove(stack.indexOf(n));
+                continue;
+            }
+            if(rem.contains(n)){
+                int a=0;
+                while(rem.get(a) != n){
+                    stack.add(rem.get(0));
+                    rem.remove(0);
+                }
+                rem.remove(0);
+                continue;   
+            }
+            
+        }
+        return true;
+    }
+}
