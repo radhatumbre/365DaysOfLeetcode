@@ -1,0 +1,44 @@
+class Solution {
+    public String[] findWords(String[] words) {
+        String top = "qwertyuiop";
+        String mid = "asdfghjkl";
+        String bottom = "zxcvbnm";
+        List<String> res = new ArrayList<>();
+        
+        for(int i=0; i<words.length; i++){
+            String word = words[i].toLowerCase();
+
+            // first char in which row
+            if(top.contains(""+word.charAt(0))){
+                // check if all characters in same row
+                if(checkRow(word, top))
+                    res.add(words[i]);
+                
+            }
+
+            else if(mid.contains(""+word.charAt(0))){
+                if(checkRow(word, mid))
+                    res.add(words[i]);
+            }
+            else{
+                if(checkRow(word, bottom))
+                    res.add(words[i]);
+            }
+        }
+        String[] ans = new String[res.size()];
+        for(int i=0; i<res.size(); i++){
+            ans[i] = res.get(i);
+        }
+        return ans;
+    }
+
+    static boolean checkRow(String word, String row){
+        for(int j=0; j<word.length(); j++){
+            if(!row.contains("" +word.charAt(j)))
+                break;
+            if(j==word.length()-1)
+                return true;
+        }
+        return false;
+    }
+}
