@@ -1,0 +1,18 @@
+class Solution {
+    public int findNumbers(int[] nums) {
+        int count=0;
+        for(int i=0; i<nums.length; i++){
+            if(findLength(nums[i])%2==0)
+                count++;
+        }
+        return count;
+    }
+    static int findLength(int n){
+        int l=0;
+        while(n>0){
+            l++;
+            n/=10;
+        }
+        return l;
+    }
+}
