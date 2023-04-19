@@ -1,0 +1,21 @@
+class Solution {
+    public int oddCells(int m, int n, int[][] indices) {
+        int[] arr = new int[m*n];
+        for(int i=0; i<indices.length; i++){
+            int row = indices[i][0];
+            int col = indices[i][1];
+            for(int j=row*n; j<n*(row+1); j++){
+                arr[j] = arr[j]+1;
+            }
+            for(int j=col; j<m*n; j+=n){
+                arr[j] = arr[j] + 1;
+            }
+        }
+        int count = 0;
+        for(int i=0; i<m*n; i++){
+            if(arr[i]%2==1)
+                count++;
+        }
+        return count;
+    }
+}
