@@ -1,0 +1,37 @@
+class Solution {
+    public String gcdOfStrings(String str1, String str2) {
+        String a="", b="";
+
+        // smallest string in b
+        if(str1.length()>str2.length()){
+            a = str1;
+            b = str2;
+        }
+        else{
+            a = str2;
+            b = str1;
+        }
+
+        // traverse string b from end
+        for(int i=b.length()-1; i>-1; i--){
+            String t = b.substring(0,i+1);
+
+            // check both strings can be formed
+            if(checkStr(t,a) && checkStr(t,b))
+                return t;
+        }
+
+        return "";
+    }
+
+    // check if both string can be formed using common divisor
+    static boolean checkStr(String t, String str){
+        String s = t;
+        while(s.length()<str.length()){
+            s += t;
+        }
+        if(s.equals(str))
+            return true;
+        return false;
+    }
+}
