@@ -1,0 +1,21 @@
+class Solution {
+    public int countMatches(List<List<String>> items, String ruleKey, String ruleValue) {
+        // what to search for (type,color,name)
+        int pos = -1;
+        if(ruleKey.equals("type"))
+            pos = 0;
+        else if(ruleKey.equals("color"))
+            pos = 1;
+        else 
+            pos = 2;
+
+        String needed = ruleValue;
+        int count = 0;
+        for(int i=0; i<items.size(); i++){
+            if( (items.get(i)).get(pos).equals(needed))
+                count++;
+        }
+        return count;
+
+    }
+}
