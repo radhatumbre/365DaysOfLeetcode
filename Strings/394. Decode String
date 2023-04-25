@@ -1,0 +1,54 @@
+class Solution {
+    public String decodeString(String s) {
+        String ans = "";
+        String[] stack = new String[s.length()*2];
+        int top = -1;
+        for(int i=0; i<s.length(); i++){
+            if(s.charAt(i) == ']'){
+
+                String str = "";
+                String temp = "";
+
+                // get the strings in the bracket
+                while(!stack[top].equals("[")){
+                    temp = stack[top--] + temp;
+                }
+                top--;
+
+                // get the num in the form of string 
+                String num = "";
+                // 0(zero) - 48	    9-57
+                while(top>-1 &&(stack[top].charAt(0)>47 && stack[top].charAt(0)<58)){
+                    num = String.valueOf(stack[top].charAt(0)) + num;
+                    top--;
+                }
+                top++;
+
+                // convert the num into integer
+                int n = Integer.parseInt(num);
+                
+                // repeat the string in bracket for N nof times
+                while(n>0){
+                    str += temp;
+                    n--;
+                }
+
+                // put the string back into the stack
+                stack[top] = str;
+            }
+            else{
+                stack[++top] = String.valueOf(s.charAt(i));
+            }
+        }
+
+        while(top>-1){
+            ans = stack[top--] + ans;
+        }
+            
+        return ans;
+    }
+}
+
+
+
+
