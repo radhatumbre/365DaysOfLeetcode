@@ -1,0 +1,18 @@
+class Solution {
+    public int maxCoins(int[] piles) {
+        int mecoins = 0;
+        int pointer = piles.length-2;
+        Arrays.sort(piles);
+        
+        int i=0; 
+
+        // [9,8,7,6,5,1,2,3,4] -> 1,2,3,"4",5,"6",7,"8",9
+        while(i<piles.length){
+            mecoins += piles[pointer];
+            pointer -= 2;
+            i+=3;
+
+        }
+        return mecoins;
+    }
+}
