@@ -1,0 +1,25 @@
+class Solution {
+    public int removeElement(int[] nums, int val) {
+        int low = 0;
+        int high = nums.length-1;
+        while(low<=high){
+            if(nums[low]==val){
+                int temp = nums[low];
+                nums[low] = nums[high];
+                nums[high] = temp;
+                high--;
+            }
+            else
+                low++;
+        }
+        int i;
+        for(i=0; i<nums.length; i++){
+            if(nums[i]==val)
+                return i;
+        }
+        return nums.length;
+       
+    }
+
+    
+}
