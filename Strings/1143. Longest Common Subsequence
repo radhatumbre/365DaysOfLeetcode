@@ -1,0 +1,47 @@
+class Solution {
+    public int longestCommonSubsequence(String text1, String text2) {
+        int m = text1.length();
+        int n = text2.length();
+
+        int[][] LCS_table = new int[m + 1][n + 1];
+
+        for (int i = 0; i <= m; i++) {
+        for (int j = 0; j <= n; j++) {
+            if (i == 0 || j == 0)
+            LCS_table[i][j] = 0;
+            else if (text1.charAt(i - 1) == text2.charAt(j - 1))
+            LCS_table[i][j] = LCS_table[i - 1][j - 1] + 1;
+            else
+            LCS_table[i][j] = Math.max(LCS_table[i - 1][j], LCS_table[i][j - 1]);
+        }
+        }
+
+
+        
+        return LCS_table[m][n];
+
+    }
+}
+
+
+// if want to print the subsequence
+        // int index = LCS_table[m][n];
+        // int temp = index;
+
+        // char[] lcs = new char[index ];
+
+        // int i = m, j = n;
+        // while (i > 0 && j > 0) {
+        // if (text1.charAt(i - 1) == text2.charAt(j - 1)) {
+        //     lcs[index - 1] = text1.charAt(i - 1);
+
+        //     i--;
+        //     j--;
+        //     index--;
+        // }
+
+        // else if (LCS_table[i - 1][j] > LCS_table[i][j - 1])
+        //     i--;
+        // else
+        //     j--;
+        // }
