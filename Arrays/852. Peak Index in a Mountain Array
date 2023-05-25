@@ -1,0 +1,24 @@
+class Solution {
+    public int peakIndexInMountainArray(int[] arr) {
+        int left = 0;
+        int right = arr.length-1;
+        while(left<right){
+            int mid = (left + right)/2;
+            if(arr[mid] < arr[mid+1])
+                left = mid+1;
+            // because now the mid can be on the right side or at the peak 
+            // if it is at peak and i do right=mid-1, right will go the the left side of the mountain
+            else    
+                right = mid;
+        }
+        return right;
+    }
+}
+
+
+
+
+//     /\
+//    /. \
+//   /.   \
+//  /      \
