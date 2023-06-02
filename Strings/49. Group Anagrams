@@ -1,0 +1,27 @@
+class Solution {
+public:
+    vector<vector<string>> groupAnagrams(vector<string>& strs) {
+        
+        unordered_map<string,vector<string>> map;
+        for(int i=0; i<strs.size(); i++){
+            string s = strs[i];
+            sort(s.begin(), s.end());
+            map[s].push_back(strs[i]);
+        }
+        
+
+        vector<vector<string>> ans;
+        unordered_map<string, vector<string>>::iterator itr;
+        for (itr = map.begin(); itr != map.end(); itr++) {
+            vector<string> temp;
+            // itr->first stores the key part and
+            // itr->second stores the value part
+            for(auto & element : itr->second ){
+                temp.push_back(element);
+            }
+            ans.push_back(temp);
+        }
+        return ans;
+
+    }
+};
