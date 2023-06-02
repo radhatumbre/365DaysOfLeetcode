@@ -1,0 +1,109 @@
+class Solution {
+public:
+    // struct B{
+    //     int x;
+    //     int y;
+    //     int r;
+    // };
+
+    int maximumDetonation(vector<vector<int>>& bombs) {
+        const int n = bombs.size();
+		
+        vector<vector<int>>v(n);
+        
+        for(int i = 0; i < n; i++) {
+            long long r = (long long)bombs[i][2] * bombs[i][2];
+            for(int j = 0; j < n; j++) {
+                if(i != j){
+                    if((long long)((long long)bombs[i][0]-bombs[j][0]) * ((long long)bombs[i][0]-bombs[j][0])+(long long)(bombs[i][1]-bombs[j][1]) * ((long long)bombs[i][1]-bombs[j][1]) <= r){
+                       v[i].push_back(j);
+                    }
+                }
+            }
+        }
+        
+        int ans = 1;
+        // try each bomb and choose that which contributes maximum detonation.
+        for(int i = 0; i < n; i++){
+            vector<bool>vis(n, 0);
+            int mx = 0;
+            
+			queue<int>q;
+            q.push(i);
+			
+            while(!q.empty()) {
+                int s = q.size();
+                for(int i = 0; i < s; i++) {
+                    int x = q.front();
+                    q.pop();
+                    vis[x] = 1;
+                    mx++;
+                    for(auto p : v[x]) {
+                        if(!vis[p]) {
+                            q.push(p);
+                            vis[p] = 1;
+                        }
+                    }
+                }
+            }
+            ans = max(ans, mx);
+        }
+        
+        return ans;
+
+
+        // int n = bombs.size();
+        // int visited[101] = {0};
+        // queue<B> q;
+        // int count =0;
+
+        // for(int i=0; i<n; i++){
+        //     for(int j=0; j<n; j++){
+        //         long long temp = pow((bombs[i][0]-bombs[j][0]),2) + pow((bombs[i][1]-bombs[j][1]),2);
+        //         long long d = sqrtl(temp);
+        //         if(d<=bombs[i][2] && i!=j){
+                    // q.push({bombs[i][0], bombs[i][1], bombs[i][2]});
+                    // cout<<"Mila baba ek toh "<<i<<" "<<j<<endl;
+                    // visited[i] = 1;
+                    // count++;
+                    // i= n*n;
+                    // break;
+        //         }
+                    
+        //     }
+        // }
+        // cout<<count<<"while chalu hoga"<<endl;
+        // if(count==0)
+        //     return 1;
+        
+        // while(!q.empty()){
+        //     cout<<count<<endl;
+        //     B b = q.front();
+        //     q.pop();
+        //     for(int i=0; i<n; i++){
+        //         if(visited[i]!=1){
+        //             long long temp = pow((bombs[i][0]-b.x), 2) + pow((bombs[i][1]-b.y), 2);
+        //             // int temp = (bombs[i][0]-b.x)*(bombs[i][0]-b.x) + (bombs[i][1]-b.y)*(bombs[i][1]-b.y) ;
+        //             long long d = sqrtl(temp);
+        //             if(d<=b.r){
+        //                 q.push({bombs[i][0], bombs[i][1], bombs[i][2]});
+        //                 visited[i] = 1;
+        //                 count++;
+        //             }
+        //         }
+        //     }
+        // }
+        // return count;
+    }
+};
+
+
+
+
+
+
+
+
+
+
+
