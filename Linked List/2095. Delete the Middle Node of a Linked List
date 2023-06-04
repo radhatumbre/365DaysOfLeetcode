@@ -11,26 +11,44 @@
 class Solution {
 public:
     ListNode* deleteMiddle(ListNode* head) {
-        ListNode* temp = head;
-        int i=0;
-        while(temp!=0){
-            i++;
-            temp=temp->next;
-        }
-        if(i==1)
-            return NULL;
-        int mid = (i+2)/2;
-        temp = head;
-        ListNode* ptr = NULL;
-        i=1;
-        cout<<mid<<endl;
-        while (temp != NULL && i<mid)
+        if(!head->next) return NULL;
+        
+        ListNode *slow = new ListNode(0);
+        ListNode *fast = slow;
+        
+        slow->next = head;
+        fast->next = head;
+        
+        while(fast->next && fast->next->next)
         {
-            i++;
-            ptr = temp;
-            temp = temp->next;
+            slow = slow->next;
+            fast = fast->next->next;
         }
-        ptr->next = temp->next;
+        
+        slow->next = slow->next->next;
         return head;
     }
 };
+
+// brute force approach;
+// ListNode* temp = head;
+//         int i=0;
+//         while(temp!=0){
+//             i++;
+//             temp=temp->next;
+//         }
+//         if(i==1)
+//             return NULL;
+//         int mid = (i+2)/2;
+//         temp = head;
+//         ListNode* ptr = NULL;
+//         i=1;
+//         cout<<mid<<endl;
+//         while (temp != NULL && i<mid)
+//         {
+//             i++;
+//             ptr = temp;
+//             temp = temp->next;
+//         }
+//         ptr->next = temp->next;
+//         return head;
