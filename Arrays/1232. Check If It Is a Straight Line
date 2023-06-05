@@ -1,0 +1,31 @@
+class Solution {
+public:
+    bool checkStraightLine(vector<vector<int>>& coordinates) {
+        double slope, temp;
+
+        if(coordinates[0][0]-coordinates[1][0] ==0)
+            slope = 9223372036854775807;
+        else{
+            double num1 = (coordinates[0][1]-coordinates[1][1]);
+            double num2 = (coordinates[0][0]-coordinates[1][0]);
+            slope = num1/num2;
+        }
+
+        for(int i=1; i<coordinates.size()-1; i++){
+            
+            if(coordinates[i][0]-coordinates[i+1][0] ==0)
+                temp = 9223372036854775807;
+            else{
+                double num1 = (coordinates[i][1]-coordinates[i+1][1]);
+                double num2 = (coordinates[i][0]-coordinates[i+1][0]);
+                temp = num1/num2;
+            }
+
+            if(temp!=slope)
+                return false;
+        }
+        return true;
+    }
+};
+
+
