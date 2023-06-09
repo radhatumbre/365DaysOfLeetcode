@@ -1,0 +1,19 @@
+class Solution {
+public:
+    char nextGreatestLetter(vector<char>& letters, char target) {
+        int u = upper_bound(letters.begin(), letters.end(), target) - letters.begin();
+        if(u==letters.size())
+            return letters[0];
+        return letters[u];
+    }
+};
+
+
+
+// char small = '{';
+        // for(int i=0; i<letters.size(); i++){
+        //     if(letters[i]>target && letters[i]<small){
+        //         return letters[i];
+        //     }
+        // }
+        // return letters[0];
