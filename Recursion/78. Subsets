@@ -1,0 +1,39 @@
+class Solution {
+private:
+    void solve(vector<vector<int>>& ans, vector<int> output, int i, vector<int>& nums){
+        // base case
+        if(i>=nums.size()){
+            ans.push_back(output);
+            return;
+        }
+
+        // exclude
+        solve(ans, output, i+1, nums);
+
+        // include
+        int element = nums[i];
+        output.push_back(element);
+        solve(ans,output, i+1, nums);
+
+    }
+public:
+    vector<vector<int>> subsets(vector<int>& nums) {
+        vector<vector<int>> ans;
+        vector<int> output;
+        int i=0;
+        solve(ans,output,i,nums);
+        return ans;
+    }
+};
+
+
+// vector<vector<int>> ans;
+// for(int i=0; i<(1<<nums.size()); i++){
+//     vector<int> subans;
+//     for(int j=0; j<nums.size(); j++){
+//         if(i & (1<<j) )
+//             subans.push_back(nums[j]);
+//     }
+//     ans.push_back(subans);
+// }
+// return ans;
