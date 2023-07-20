@@ -1,0 +1,48 @@
+
+//  method 1
+class Solution {
+public:
+    int findCenter(vector<vector<int>>& edges) {
+        if(edges[0][0]==edges[1][0] || edges[0][0]==edges[1][1])
+            return edges[0][0];
+        else
+            return edges[0][1];
+    }
+};
+
+
+
+//  method 2
+
+class Solution {
+public:
+
+    // Adjacency List
+    vector<list<int> > adj;
+    void addEdge(int u, int v){
+        adj[u].push_back(v);
+        adj[v].push_back(u);
+    }
+
+    int findCenter(vector<vector<int>>& edges) {
+        // finding nof nodes
+        int n= 0;
+        for(int i=0; i<edges.size(); i++){
+            for(int j=0; j<2; j++){
+                if(edges[i][j]>n)
+                    n = edges[i][j];
+            }
+        }
+        adj.resize(n+1);
+        for(int i=0; i<edges.size(); i++){
+            addEdge(edges[i][0],edges[i][1]);
+        }
+
+        for(int i=1; i<n+1; i++){
+            if(adj[i].size()==n-1)
+                return i;
+        }
+        return -1;
+    }
+};
+
