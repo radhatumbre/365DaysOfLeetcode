@@ -1,0 +1,81 @@
+//  method 1
+
+
+class Solution {
+public:
+    bool canVisitAllRooms(vector<vector<int>>& rooms) {
+        // BFS Traversal
+        int n= rooms.size()-1;
+        vector<bool> visited(n, false);
+        queue<int> q;
+        q.push(0);
+        visited[0]= true;
+        while(!q.empty()){
+            int node = q.front();
+            q.pop();
+            for(int i=0; i<rooms[node].size(); i++){
+                if(!visited[rooms[node][i]]){
+                    visited[rooms[node][i]] = true;
+                    q.push(rooms[node][i]);
+                    n--;
+                }
+            }
+        }
+
+        return n==0;
+    }
+};
+
+
+
+
+
+//  method 2
+class Solution {
+public:
+    
+    int n;
+    vector<bool> visited;
+	vector<list<int> > adj;
+	void addEdge(int v, int w){
+        adj[v].push_back(w);
+    }
+    void BFS(int s){
+        visited.resize(n, false);
+        queue<int> queue;
+
+        visited[s] = true;
+        queue.push(s);
+
+        while (!queue.empty()) {
+
+            s = queue.front();
+            cout << s << " ";
+            queue.pop();
+
+            for (auto adjacent : adj[s]) {
+                if (!visited[adjacent]) {
+                    visited[adjacent] = true;
+                    queue.push(adjacent);
+                }
+            }
+        }
+    }
+    bool canVisitAllRooms(vector<vector<int>>& rooms) {
+        n= rooms.size();
+        adj.resize(n);
+
+        for(int i=0; i<n; i++){
+            for(auto key : rooms[i]){
+                addEdge(i,key);
+            }
+        }
+
+        BFS(0);
+        for(int i=1; i<n; i++){
+            if(!visited[i])
+                return false;
+        }
+        return true;
+    }
+};
